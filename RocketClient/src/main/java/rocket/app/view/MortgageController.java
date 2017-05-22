@@ -6,6 +6,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import rocket.app.MainApp;
 import rocketCode.Action;
@@ -15,6 +17,11 @@ public class MortgageController {
 
 	@FXML TextField txtCreditScore;
 	@FXML TextField txtMortgageAmt;
+	@FXML TextField txtIncome;
+	@FXML TextField txtExpenses;
+	@FXML TextField txtHouseCost;
+	@FXML ComboBox cmbTerm;
+	@FXML Label lblMortgagePayment;
 	
 	private TextField txtNew;
 	

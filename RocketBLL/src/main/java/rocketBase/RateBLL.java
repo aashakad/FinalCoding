@@ -1,5 +1,7 @@
 package rocketBase;
 
+import static org.junit.Assert.assertEquals;
+
 import java.util.ArrayList;
 
 import org.apache.poi.ss.formula.functions.*;
@@ -11,7 +13,7 @@ public class RateBLL {
 
 	private static RateDAL _RateDAL = new RateDAL();
 	
-	static double getRate(int GivenCreditScore) throws RateException 
+	public static double getRate(int GivenCreditScore) throws RateException 
 	{
 		double dInterestRate = 0;
 		
@@ -29,6 +31,9 @@ public class RateBLL {
 		
 		ArrayList<RateDomainModel> rates = RateDAL.getAllRates();
 		
+		for (RateDomainModel r: rates) {
+			if (r.getiMinCreditScore() == GivenCreditScore)
+				dInterestRate = r.getdInterestRate(); }
 
 		//TODO: Filter the ArrayList...  look for the correct rate for the given credit score.
 		//	Easiest way is to apply a filter using a Lambda function.
@@ -36,11 +41,16 @@ public class RateBLL {
 		//	Example... how to use Lambda functions:
 		//			https://github.com/CISC181/Lambda
 		
-		return dInterestRate;
-		
-		
+		if (dInterestRate == 0){
+			RateDomainModel r = new RateDomainModel();
+			r.setiMinCreditScore(GivenCreditScore);
+			r.setdInterestRate(0);
+			r.setiRateID(0);
+			throw new RateException(r);
+		}
+		else 
+			return dInterestRate;	
 	}
-	
 	
 	
 	
